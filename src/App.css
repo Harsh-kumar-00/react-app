@@ -1,0 +1,27 @@
+.headline{
+color: blue;
+}
+.Count{
+    color: brown;
+    text-align: center;
+    background-color: bisque;
+}
+.plusone{
+    color: rgb(26, 87, 6);
+    background-color: greenyellow;
+    margin-right: 10px;
+}
+.minusone{
+    color: brown;
+    background-color: orange;
+    margin-right: 10px;
+}
+.reset{
+    color: blue;
+    background-color: rgb(143, 188, 215);
+    margin-right: 10px;
+}
+.twice{
+    color: blueviolet;
+    background-color: rgb(195, 243, 179);
+}
