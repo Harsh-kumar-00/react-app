@@ -1,7 +1,7 @@
 import Greetings from "./Greetings";
-import Welcome from "./welcome";
+import Welcome from "./Welcome";
 import Messages from "./Messages";
-import Image from "./image";
+import Image from "./Image";
 import Rating from "./Rating";
 import { useState } from "react";
 import "./App.css"
