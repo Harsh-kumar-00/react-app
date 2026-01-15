@@ -5,6 +5,9 @@ import Image from "./Image";
 import Rating from "./Rating";
 import { useState } from "react";
 import "./App.css"
+import Child from "./Child";
+import { useEffect } from "react";
+
 
 function App() {
   const [count, setcount] = useState(0);
@@ -13,6 +16,30 @@ function App() {
   const [Message, setMessage] = useState("GOOD MORNING!🌞");
   const [task, setTask] = useState(""); //store input box text
   const [todos, setTodos] = useState([]); //store list of tasks
+
+  const countStyle = {
+    color: count === 0 ? "Green" : "brown"
+  };
+
+  const handleSubmit= (e) => {
+    e.preventDefault();
+    alert("submitted: " + name);
+    setName("");
+  };
+
+  const [name,setName] = useState("");
+  const [naam,setNaam] = useState("");
+
+  const updateMessage = () => {
+    setMessage("Button clicked from child");
+  };
+
+  useEffect(() => {
+    if(likes===6)
+    {
+      alert("🥳you have reached 6 likes!");
+    }
+  },[likes]);
 
   return (
     <>
@@ -41,7 +68,7 @@ function App() {
       <Rating product="Washing machine" stars={5} />
       <br />
       <hr />
-      <h3 className="Count">count = {count}</h3>
+      <h3 style={countStyle}>count = {count}</h3>
       <br />
       <button className="plusone" onClick={() => setcount(count + 1)}>PLUS ONE</button>
       
@@ -68,6 +95,7 @@ function App() {
       <button onClick={() => setMessage(Message == "GOOD MORNING!🌞" ? "GOOD NIGHT!🌙" : "GOOD MORNING!🌞")}>
         Change Message!
       </button>
+      
       <hr />
       <div style={{ padding: "0px" }}>
         <h1 style={{ color: "green", backgroundColor: "yellow", textAlign: "center" }}> TO DO APP </h1>
@@ -97,7 +125,32 @@ function App() {
           ))}
         </ul>
         <hr />
+
+    <form onSubmit={handleSubmit}>
+        <input 
+        type="text"               
+        value={name}               
+        onChange={(p) => setName(p.target.value)}              
+        placeholder="Enter your name"
+        />
+        <button type="submit">SUBMIT</button>
+    </form>
+    <p>Typing...{name}</p>
       </div>
+<hr />
+    <div style={{ backgroundColor: "skyblue" }}>
+       <h2>Parent Component</h2>
+
+       <input 
+       type="text" 
+       value = {naam}
+       onChange ={(k) => setNaam(k.target.value)}
+       placeholder="Type name"
+       />
+
+       {/*passing name to child*/}
+       <Child student = {naam} update = {updateMessage} />
+    </div>
     </>
   );
 }
