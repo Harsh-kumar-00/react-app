@@ -7,7 +7,9 @@ import { useState } from "react";
 import "./App.css"
 import Child from "./Child";
 import { useEffect } from "react";
-
+import User from "./User";
+import Theme from "./Theme";
+import NewTodo from "./NewTodo";
 
 function App() {
   const [count, setcount] = useState(0);
@@ -16,30 +18,35 @@ function App() {
   const [Message, setMessage] = useState("GOOD MORNING!🌞");
   const [task, setTask] = useState(""); //store input box text
   const [todos, setTodos] = useState([]); //store list of tasks
+  const [sandesh, setSandesh] = useState("");
 
   const countStyle = {
     color: count === 0 ? "Green" : "brown"
   };
 
-  const handleSubmit= (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     alert("submitted: " + name);
     setName("");
   };
 
-  const [name,setName] = useState("");
-  const [naam,setNaam] = useState("");
+  const [name, setName] = useState("");
+  const [naam, setNaam] = useState("");
 
   const updateMessage = () => {
-    setMessage("Button clicked from child");
+    setSandesh("Button clicked from child");
   };
 
   useEffect(() => {
-    if(likes===6)
-    {
-      alert("🥳you have reached 6 likes!");
+    if (likes === 5) {
+      alert("🥳you have reached 5 likes!");
     }
-  },[likes]);
+  }, [likes]);
+
+  useEffect(() => {
+    document.title = `${Message}`;
+  }, [Message]);
+
 
   return (
     <>
@@ -71,11 +78,11 @@ function App() {
       <h3 style={countStyle}>count = {count}</h3>
       <br />
       <button className="plusone" onClick={() => setcount(count + 1)}>PLUS ONE</button>
-      
+
       <button className="reset" onClick={() => setcount(0)}>RESET</button>
-      
+
       <button className="minusone" onClick={() => { if (count > 0) setcount(count - 1) }}>MINUS ONE</button>
-      
+
       <button className="twice" onClick={() => setcount(count * 2)}>TWICE</button>
       <br />
       <br />
@@ -87,7 +94,7 @@ function App() {
       <hr />
       {show && <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque delectus earum, voluptas deserunt dignissimos quidem. Odio repudiandae vero modi rem. Nihil, ea deserunt. Quod aliquam quisquam doloribus, at excepturi aspernatur!</p>}
       <br />
-      <button style={(show?{color:"blue"}:{})} onClick={() => setshow(!show)}>
+      <button style={(show ? { color: "blue" } : {})} onClick={() => setshow(!show)}>
         {show ? "HIDE TEXT" : "SHOW TEXT"}
       </button>
       <hr />
@@ -95,7 +102,7 @@ function App() {
       <button onClick={() => setMessage(Message == "GOOD MORNING!🌞" ? "GOOD NIGHT!🌙" : "GOOD MORNING!🌞")}>
         Change Message!
       </button>
-      
+
       <hr />
       <div style={{ padding: "0px" }}>
         <h1 style={{ color: "green", backgroundColor: "yellow", textAlign: "center" }}> TO DO APP </h1>
@@ -126,31 +133,38 @@ function App() {
         </ul>
         <hr />
 
-    <form onSubmit={handleSubmit}>
-        <input 
-        type="text"               
-        value={name}               
-        onChange={(p) => setName(p.target.value)}              
-        placeholder="Enter your name"
-        />
-        <button type="submit">SUBMIT</button>
-    </form>
-    <p>Typing...{name}</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={name}
+            onChange={(p) => setName(p.target.value)}
+            placeholder="Enter your name"
+          />
+          <button type="submit">SUBMIT</button>
+        </form>
+        <p>Typing...{name}</p>
       </div>
-<hr />
-    <div style={{ backgroundColor: "skyblue" }}>
-       <h2>Parent Component</h2>
+      <hr />
+      <div style={{ backgroundColor: "gray" }}>
+        <h2>Parent Component</h2>
+        <h2>{sandesh}</h2>
+        <input
+          type="text"
+          value={naam}
+          onChange={(k) => setNaam(k.target.value)}
+          placeholder="Type name"
+        />
 
-       <input 
-       type="text" 
-       value = {naam}
-       onChange ={(k) => setNaam(k.target.value)}
-       placeholder="Type name"
-       />
-
-       {/*passing name to child*/}
-       <Child student = {naam} update = {updateMessage} />
-    </div>
+        {/*passing name to child*/}
+        <Child student={naam} update={updateMessage} />
+      </div>
+      <hr />
+      <User />
+      <hr />
+      <Theme />
+      <hr />
+      <NewTodo />
+      <hr />
     </>
   );
 }
